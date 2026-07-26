@@ -30,11 +30,7 @@ export default function AnimatedName() {
                   delay: globalIndex * 0.05,
                   ease: [0.2, 0.65, 0.3, 0.9],
                 }}
-                className="inline-block text-gradient"
-                style={{
-                  textShadow:
-                    "0 0 40px rgba(var(--accent),0.15), 0 0 80px rgba(var(--accent),0.08)",
-                }}
+                className="inline-block text-[rgb(var(--accent))]"
               >
                 {char === " " ? "\u00A0" : char}
               </motion.span>
