@@ -14,7 +14,7 @@ export default function AnimatedName() {
   const name = "Nutan Kumar Naik";
 
   return (
-    <span className="inline-flex flex-wrap font-[family-name:var(--font-inter)]">
+    <span className="inline-flex flex-wrap font-[family-name:var(--font-inter)] italic">
       {name.split(" ").map((word, wi) => (
         <span key={wi} className="inline-flex whitespace-nowrap">
           {splitChars(word).map((char, ci) => {

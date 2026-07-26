@@ -97,9 +97,17 @@ export default function Hero() {
             className="absolute -inset-1.5 rounded-full bg-[conic-gradient(from_0deg,rgb(var(--accent)),transparent_30%,transparent_70%,rgb(var(--accent)))] opacity-50 blur-[2px]"
           />
           <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-2 border-[rgb(var(--accent))]/20 bg-neutral-100 dark:bg-neutral-900">
-            <span className="text-3xl font-bold text-[rgb(var(--accent))]">NK</span>
+            <span className="text-3xl font-bold text-[rgb(var(--accent))]">NKN</span>
           </div>
         </motion.div>
+
+        {/* Name */}
+        <motion.h1
+          variants={itemVariants}
+          className="text-5xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl"
+        >
+          <AnimatedName />
+        </motion.h1>
 
         {/* Badge */}
         <motion.div
@@ -111,14 +119,6 @@ export default function Hero() {
             AVAILABLE FOR OPPORTUNITIES
           </span>
         </motion.div>
-
-        {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl"
-        >
-          <AnimatedName />
-        </motion.h1>
 
         {/* Typing role */}
         <motion.div variants={itemVariants} className="mt-4 h-8">

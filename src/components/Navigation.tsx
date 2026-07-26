@@ -53,7 +53,7 @@ export default function Navigation() {
           className="flex items-center gap-2"
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgb(var(--accent))]/10 text-xs font-bold text-[rgb(var(--accent))] transition-all hover:bg-[rgb(var(--accent))]/20">
-            NK
+            NKN
           </span>
         </Link>
 
