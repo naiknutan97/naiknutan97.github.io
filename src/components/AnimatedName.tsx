@@ -30,7 +30,10 @@ export default function AnimatedName() {
                   delay: globalIndex * 0.05,
                   ease: [0.2, 0.65, 0.3, 0.9],
                 }}
-                className="inline-block text-[rgb(var(--accent))]"
+                whileHover={{ scale: 1.15, y: -2, color: "rgb(var(--accent))" }}
+                whileTap={{ scale: 0.9 }}
+                className="inline-block cursor-default transition-colors"
+                style={{ color: "rgb(var(--accent))" }}
               >
                 {char === " " ? "\u00A0" : char}
               </motion.span>

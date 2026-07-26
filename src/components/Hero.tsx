@@ -104,7 +104,7 @@ export default function Hero() {
         {/* Name */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl"
+          className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
         >
           <AnimatedName />
         </motion.h1>
