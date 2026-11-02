@@ -1,20 +1,15 @@
 export default function Section({
   id,
-  index,
   title,
   children,
 }: {
   id?: string;
-  index?: string;
   title: string;
   children: React.ReactNode;
 }) {
   return (
     <section id={id} className="mt-16 scroll-mt-20 grid gap-x-10 gap-y-5 border-t border-line pt-8 md:grid-cols-[11rem_1fr]">
-      <h2 className="flex items-baseline gap-3 text-sm font-semibold text-ink">
-        {index && <span className="font-mono text-xs font-medium text-accent">{index}</span>}
-        {title}
-      </h2>
+      <h2 className="text-sm font-semibold text-ink">{title}</h2>
       <div className="min-w-0">{children}</div>
     </section>
   );

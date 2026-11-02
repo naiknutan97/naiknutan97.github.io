@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CommandPalette from "@/components/CommandPalette";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "/", label: "profile" },
@@ -41,10 +42,10 @@ export default function Navigation() {
             Nutan Kumar Naik
             <span className="hidden font-mono text-xs font-normal text-muted sm:inline">@naiknutan97</span>
           </Link>
-          <div className="flex items-center gap-4">
-            <ul className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px]">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <ul className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[13px] sm:gap-x-5">
               {links.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} className={link.href === "/" ? "hidden sm:block" : undefined}>
                   <Link
                     href={link.href}
                     className={
@@ -65,6 +66,7 @@ export default function Navigation() {
               <kbd>Ctrl</kbd>
               <kbd>K</kbd>
             </button>
+            <ThemeToggle />
           </div>
         </nav>
       </header>

@@ -71,7 +71,7 @@ export default async function Home() {
         ))}
       </dl>
 
-      <Section id="about" index="01" title="About">
+      <Section id="about" title="About">
         <div className="max-w-2xl space-y-4 leading-relaxed text-ink">
           {profile.summary.map((p) => (
             <p key={p}>{p}</p>
@@ -79,7 +79,7 @@ export default async function Home() {
         </div>
       </Section>
 
-      <Section id="experience" index="02" title="Experience">
+      <Section id="experience" title="Experience">
         <div className="space-y-9">
           {experience.map((role) => (
             <div key={role.title}>
@@ -107,7 +107,7 @@ export default async function Home() {
         </div>
       </Section>
 
-      <Section id="projects" index="03" title="Projects">
+      <Section id="projects" title="Projects">
         <div className="grid gap-4 sm:grid-cols-2">
           {featured.map((p, i) => (
             <ProjectCard key={p.name} project={p} stars={stars[i]} />
@@ -118,7 +118,7 @@ export default async function Home() {
         </Link>
       </Section>
 
-      <Section id="publications" index="04" title="Publications">
+      <Section id="publications" title="Publications">
         <ul className="space-y-4">
           {publications.map((pub) => (
             <li key={pub.title} className="leading-relaxed">
@@ -136,7 +136,7 @@ export default async function Home() {
         </Link>
       </Section>
 
-      <Section id="skills" index="05" title="Skills">
+      <Section id="skills" title="Skills">
         <dl className="space-y-4">
           {skills.map((s) => (
             <div key={s.label} className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-4">
@@ -149,7 +149,7 @@ export default async function Home() {
         </dl>
       </Section>
 
-      <Section id="training" index="06" title="Industrial Training">
+      <Section id="training" title="Industrial Training">
         <ul className="space-y-3 text-[15px] leading-relaxed">
           {training.map((t) => (
             <li key={t.org}>
@@ -159,7 +159,7 @@ export default async function Home() {
         </ul>
       </Section>
 
-      <Section id="education" index="07" title="Education">
+      <Section id="education" title="Education">
         <div className="space-y-5">
           {education.map((e) => (
             <Row
@@ -177,7 +177,7 @@ export default async function Home() {
         </div>
       </Section>
 
-      <Section id="recognition" index="08" title="Recognition">
+      <Section id="recognition" title="Recognition">
         <dl className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {recognition.map((r) => (
             <div key={r.label} className="flex items-baseline justify-between gap-4 bg-paper px-4 py-3">

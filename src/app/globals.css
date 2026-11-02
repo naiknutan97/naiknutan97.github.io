@@ -19,8 +19,9 @@
     color-scheme: light;
   }
 
+  /* Dark: follows the system unless the visitor picked a theme (data-theme on <html>). */
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --paper: #0b0d10;
       --ink: #e6e8eb;
       --muted: #9aa3ad;
@@ -30,6 +31,17 @@
       --panel: #11151b;
       color-scheme: dark;
     }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #0b0d10;
+    --ink: #e6e8eb;
+    --muted: #9aa3ad;
+    --line: #23272e;
+    --accent: #7aa7ff;
+    --chip: #161a20;
+    --panel: #11151b;
+    color-scheme: dark;
   }
 
   body {

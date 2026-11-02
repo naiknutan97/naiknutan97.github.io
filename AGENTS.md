@@ -9,7 +9,7 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 ## Technology Stack
 
 - **Framework:** Next.js (TypeScript, App Router), static export (`output: "export"`)
-- **Styling:** Tailwind CSS with CSS-variable colour tokens in `globals.css`; dark mode follows the system (`darkMode: "media"`)
+- **Styling:** Tailwind CSS with CSS-variable colour tokens in `globals.css`. Theme follows the system unless the visitor picks light or dark with the header toggle (`ThemeToggle.tsx`, stored in localStorage, applied as `data-theme` on `<html>` by an inline script before paint)
 - **Content:** structured data in `src/data/`
 - **Deployment:** GitHub Pages via `.github/workflows/deploy.yml` on push to `main`
 
@@ -19,7 +19,7 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 
 A professional profile with an engineer's voice: it reads like a well-set resume, with restrained developer touches.
 
-**Prefer:** Inter for prose, JetBrains Mono for metadata (dates, arXiv ids, stack chips, nav), one blue accent, thin rules, numbered sections with a label column (`max-w-5xl`), the terminal panel on the home page, bordered project cards, real facts only.
+**Prefer:** Inter for prose, JetBrains Mono for metadata (dates, arXiv ids, stack chips, nav), one blue accent, thin rules, sections with a plain title in a label column (no section numbers) (`max-w-5xl`), the terminal panel on the home page, bordered project cards, real facts only.
 
 **Avoid:** particles, custom cursors, gradients, page transitions, skill-percentage bars, placeholder content. The only motion is the terminal cursor blink, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
 
@@ -146,8 +146,9 @@ src/
 ├── components/
 │   ├── Navigation.tsx   # Name + mono links + Ctrl/Cmd+K handler
 │   ├── CommandPalette.tsx
+│   ├── ThemeToggle.tsx  # system → light → dark
 │   ├── Footer.tsx
-│   ├── Section.tsx      # Numbered section; PageTitle; Chips
+│   ├── Section.tsx      # Section with label column; PageTitle; Chips
 │   ├── Terminal.tsx     # whoami / now / stack panel
 │   ├── ProjectCard.tsx
 │   └── Icons.tsx

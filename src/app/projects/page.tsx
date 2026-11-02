@@ -18,7 +18,7 @@ export default async function Projects() {
         intro="Open-source software for observing, evaluating and governing AI agents, and the research projects behind my geoscience work."
       />
 
-      <Section index="01" title="Open source">
+      <Section title="Open source">
         <div className="grid gap-4 sm:grid-cols-2">
           {projects.map((p, i) => (
             <ProjectCard key={p.name} project={p} stars={stars[i]} detailed />
@@ -31,7 +31,7 @@ export default async function Projects() {
         </p>
       </Section>
 
-      <Section index="02" title="Research">
+      <Section title="Research">
         <div className="space-y-6">
           {research.map((r) => (
             <div key={r.name}>

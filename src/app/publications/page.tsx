@@ -30,7 +30,7 @@ export default function Publications() {
         intro="Research on AI observability, governance and the assessment of AI agents, written with the Traccia team at Algen AI."
       />
 
-      <Section index="01" title="Papers">
+      <Section title="Papers">
         <div className="space-y-10">
           {publications.map((pub) => (
             <article key={pub.title}>
@@ -61,7 +61,7 @@ export default function Publications() {
         </div>
       </Section>
 
-      <Section index="02" title="Articles">
+      <Section title="Articles">
         <ul className="space-y-4">
           {articles.map((a) => (
             <li key={a.url}>
