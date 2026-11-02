@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Silkscreen } from "next/font/google";
+import { Inter, JetBrains_Mono, Martian_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-const sans = IBM_Plex_Sans({
+const sans = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
-const mono = IBM_Plex_Mono({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
   variable: "--font-mono",
 });
 
-const pixel = Silkscreen({
+const display = Martian_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-pixel",
+  variable: "--font-display",
 });
 
 const description =
@@ -41,17 +38,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} ${pixel.variable}`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${display.variable}`}>
       <head>
-        <meta name="theme-color" content="#061f19" />
+        <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://drive.google.com https://lh3.googleusercontent.com https://*.googleusercontent.com; frame-src 'self' https://docs.google.com https://accounts.google.com; connect-src 'self' https://www.googleapis.com https://accounts.google.com; font-src 'self' data:;"
         />
       </head>
-      <body className="bg-paper font-sans text-body">
+      <body className="font-sans">
         <Navigation />
-        <main className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 sm:pt-16">{children}</main>
+        <main className="mx-auto max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">{children}</main>
         <Footer />
       </body>
     </html>

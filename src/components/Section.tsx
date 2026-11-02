@@ -1,51 +1,42 @@
 export default function Section({
+  id,
   index,
   title,
   children,
 }: {
+  id?: string;
   index?: string;
   title: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="mt-20">
-      <h2 className="flex items-center gap-4 font-mono text-2xl font-bold uppercase text-mint sm:text-3xl">
-        {index && <span className="font-pixel text-base font-normal text-accent">{index}</span>}
-        <span className="shrink-0">{title}</span>
-        <span aria-hidden="true" className="h-px flex-1 bg-line" />
-      </h2>
-      <div className="mt-8">{children}</div>
+    <section id={id} className="mt-24 scroll-mt-24 grid gap-x-12 gap-y-6 lg:grid-cols-[13rem_1fr]">
+      <div className="lg:sticky lg:top-24 lg:self-start">
+        {index && <p className="font-mono text-xs text-accent">{index}</p>}
+        <h2 className="mt-1 font-display text-xl font-medium text-ink">{title}</h2>
+      </div>
+      <div className="min-w-0">{children}</div>
     </section>
   );
 }
 
 export function PageTitle({ path, title, intro }: { path?: string; title: string; intro?: string }) {
   return (
-    <div>
-      {path && (
-        <p className="font-mono text-sm text-muted">
-          <span className="text-accent">~</span>/{path} <span className="cursor text-accent">▍</span>
-        </p>
-      )}
-      <h1 className="mt-3 font-pixel text-4xl uppercase text-mint sm:text-6xl">{title}</h1>
-      {intro && <p className="mt-5 max-w-3xl text-lg leading-relaxed text-body">{intro}</p>}
+    <div className="max-w-3xl">
+      {path && <p className="font-mono text-xs text-muted">~/{path}</p>}
+      <h1 className="mt-3 font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl">{title}</h1>
+      {intro && <p className="mt-5 text-lg leading-relaxed text-body">{intro}</p>}
     </div>
   );
 }
 
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9.+]+/g, "-").replace(/^-|-$/g, "");
-
-// Hashtag labels. "solid" is the neon tag; "outline" suits long lists.
-export function Chips({ items, variant = "outline" }: { items: string[]; variant?: "solid" | "outline" }) {
-  const cls =
-    variant === "solid"
-      ? "bg-accent text-paper"
-      : "border border-line bg-surface text-mint hover:border-accent";
+// Quiet, readable tags: lowercase mono, hairline border.
+export function Tags({ items }: { items: string[] }) {
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className="flex flex-wrap gap-1.5">
       {items.map((s) => (
-        <li key={s} className={`rounded px-2 py-0.5 font-mono text-xs font-bold uppercase ${cls}`}>
-          #{slug(s)}
+        <li key={s} className="rounded border border-line px-1.5 py-0.5 font-mono text-[11.5px] text-muted">
+          {s.toLowerCase()}
         </li>
       ))}
     </ul>

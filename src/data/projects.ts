@@ -3,6 +3,7 @@
 export interface Project {
   name: string;
   repo?: string;
+  lang: ("Python" | "TypeScript")[];
   role: string;
   summary: string;
   points: string[];
@@ -16,6 +17,7 @@ export const projects: Project[] = [
   {
     name: "Traccia SDKs",
     repo: "traccia-ai/traccia-py",
+    lang: ["Python", "TypeScript"],
     role: "Research lead, Algen AI",
     summary:
       "OpenTelemetry-native SDKs for AI agent observability, tracing, evaluation, governance and runtime policy enforcement.",
@@ -36,6 +38,7 @@ export const projects: Project[] = [
   {
     name: "AgentStripes engine",
     repo: "naiknutan97/evidence-graded-agent-maturity-model",
+    lang: ["Python"],
     role: "Author",
     summary: "Assessment engine for the AgentStripes maturity model, with the full replication package for the paper.",
     points: [
@@ -53,6 +56,7 @@ export const projects: Project[] = [
   {
     name: "Traccia reference agent",
     repo: "naiknutan97/traccia-paper-examples",
+    lang: ["Python"],
     role: "Author",
     summary: "Reference implementation of the AI loan-approval assistant in Section 4.8 of the Traccia paper.",
     points: [
@@ -73,6 +77,7 @@ export const projects: Project[] = [
   {
     name: "AI Water Tracker",
     repo: "naiknutan97/ai_water_tracker",
+    lang: ["Python"],
     role: "Author",
     summary: "Daily water-intake tracker with an LLM agent that gives personalised hydration feedback.",
     points: [
@@ -87,6 +92,7 @@ export const projects: Project[] = [
   {
     name: "naiknutan97.github.io",
     repo: "naiknutan97/naiknutan97.github.io",
+    lang: ["TypeScript"],
     role: "Author",
     summary: "This site: a statically exported Next.js app, deployed to GitHub Pages by GitHub Actions.",
     points: [

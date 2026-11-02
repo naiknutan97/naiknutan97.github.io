@@ -14,25 +14,26 @@ export default function Resume() {
         title="Resume"
         intro="One page covering AI research at Algen AI, open-source projects, doctoral research at NIT Rourkela, industrial training at ONGC and CMPDI, publications and technical skills."
       />
-      <div className="mt-8 flex flex-wrap gap-3">
+      <div className="mt-8 flex flex-wrap gap-2">
         <a
           href={profile.resumePdf}
-          className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-bold text-paper hover:brightness-110"
+          className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition hover:brightness-110"
         >
-          <FileIcon /> wget resume.pdf
+          <FileIcon /> Download PDF
         </a>
         <Link
           href="/"
-          className="rounded-md bg-surface-2 px-4 py-2 text-sm font-bold text-ink hover:bg-line"
+          className="inline-flex items-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-ink hover:border-muted"
         >
           View profile online
         </Link>
       </div>
-      <p className="mt-6 font-mono text-sm text-muted">
-        <span className="text-accent">#</span> phone number or a role-specific version?{" "}
+      <p className="mt-6 text-sm text-muted">
+        For a phone number or a role-specific version, write to{" "}
         <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
           {profile.email}
         </a>
+        .
       </p>
       <iframe
         src={profile.resumePdf}

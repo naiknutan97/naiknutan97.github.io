@@ -17,21 +17,21 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 
 ## Design Philosophy
 
-Full hacker style (think a dark-green tech-blog look), with resume-grade content underneath.
+"Field log meets trace viewer": an engineer's profile whose geek details come from the owner's own work (OpenTelemetry traces, geoscience field notebooks), not from another site's look.
 
-**Theme:** one dark theme for all visitors. Tokens in `globals.css`: `paper` #061f19, `surface` #0a2e24, `line` #1d6854, `mid` #2bab76, `mint` #b9ffd0 (headings), `accent` #63ff86 (neon), `panel` #03140f.
+**Theme:** follows the system. Dark is graphite with phosphor amber; light is field-notebook paper with burnt amber. Tokens in `globals.css` (`paper`, `surface`, `line`, `ink`, `body`, `muted`, `accent`, `accent-ink`, `data`); `panel-*` tokens keep code and trace panels dark in both themes. Faint dot grid on the body.
 
-**Type:** Silkscreen (`font-pixel`) for the name, page titles and big numbers; IBM Plex Mono for headings, tags, nav and metadata; IBM Plex Sans for prose.
+**Type:** Martian Mono (`font-display`) for the name and headings; JetBrains Mono for metadata, keys, tags and nav; Inter for prose.
 
-**Patterns:** neon header bar with pixel "NK" logo; secondary nav bar with 1–4 keyboard shortcuts; uppercase mono section headings followed by a long rule; solid neon `#hashtag` tags; pixel-art tiles (`Pixels.tsx`, seeded so builds are stable) on stats and project cards; terminal panel on the home page; `max-w-6xl`.
+**Patterns:** one slim sticky nav; command palette on Ctrl/Cmd+K or "/" (`CommandPalette.tsx`); hero career trace (`CareerTrace.tsx`, data in `profile.ts` `trace`); metrics row with dotted keys; numbered sections with a sticky label column; hairline dividers instead of boxes. Cards are used only for projects. Tags are lowercase and quiet; the amber accent marks one primary action per view. Footer shows build date and commit (`GITHUB_SHA`).
 
-**Avoid:** particles, custom cursors, page transitions, skill-percentage bars, placeholder content, other brands' names or logos. The only motion is the cursor blink, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
+**Avoid:** copying another brand's palette or layout, rainbow decoration, pixel fonts for long text, uppercase tag soup, particles, custom cursors, page transitions, skill-percentage bars, placeholder content. The only motion is the status-dot pulse, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume). Trace dates use years unless the source gives months.
 
 ---
 
 ## Site Structure
 
-- **Profile** (`/`): hero with terminal panel, stats strip, about, experience, featured projects, publications, skills, industrial training, education, recognition
+- **Profile** (`/`): hero with career trace, metrics row, about, experience, featured projects, publications, skills, industrial training, education, recognition
 - **Projects** (`/projects/`): open-source projects with details, plus research projects
 - **Publications** (`/publications/`): papers with summaries, links and BibTeX, plus articles
 - **Resume** (`/resume/`): download and inline preview of `public/Nutan_Kumar_Naik_Resume.pdf` (public copy with no phone number)
@@ -53,7 +53,7 @@ npm run lint       # Run ESLint (next lint)
 npx tsc --noEmit   # TypeScript check (run before committing)
 ```
 
-**Note:** This project uses `next/font/google` (IBM Plex Sans, IBM Plex Mono, Silkscreen) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
+**Note:** This project uses `next/font/google` (Inter, JetBrains Mono, Martian Mono) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
 
 ## Environment Notes
 
@@ -139,18 +139,18 @@ Re-run `npm run curate` anytime to update your selection. Previous choices are r
 ```
 src/
 ├── app/
-│   ├── layout.tsx       # Root layout (Plex Sans, Plex Mono, Silkscreen; CSP meta; Nav; Footer)
+│   ├── layout.tsx       # Root layout (Inter, JetBrains Mono, Martian Mono; CSP meta; Nav; Footer)
 │   ├── page.tsx         # Profile page
 │   ├── projects/
 │   ├── publications/
 │   ├── resume/
 │   └── gallery/
 ├── components/
-│   ├── Navigation.tsx   # Neon bar, pixel logo, nav with 1–4 shortcuts
+│   ├── Navigation.tsx   # Slim nav + Ctrl/Cmd+K handler
+│   ├── CommandPalette.tsx
+│   ├── CareerTrace.tsx  # Hero trace-viewer chart
 │   ├── Footer.tsx
-│   ├── Pixels.tsx       # Seeded pixel-art SVG tiles
-│   ├── Section.tsx      # Numbered section; PageTitle; hashtag Chips
-│   ├── Terminal.tsx     # whoami / now / stack panel
+│   ├── Section.tsx      # Numbered section; PageTitle; Tags
 │   ├── ProjectCard.tsx
 │   └── Icons.tsx
 ├── lib/

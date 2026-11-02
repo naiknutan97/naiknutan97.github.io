@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Section, { Chips, PageTitle } from "@/components/Section";
+import Section, { PageTitle, Tags } from "@/components/Section";
 import ProjectCard from "@/components/ProjectCard";
-import { tileColors } from "@/components/Pixels";
 import { profile } from "@/data/profile";
 import { projects, research } from "@/data/projects";
 import { getStars } from "@/lib/github";
@@ -19,37 +18,28 @@ export default async function Projects() {
         intro="Open-source software for observing, evaluating and governing AI agents, and the research projects behind my geoscience work."
       />
 
-      <Section index="01" title="Open Source">
-        <div className="grid gap-5 md:grid-cols-2">
+      <Section index="01" title="Open source">
+        <div className="grid gap-4 md:grid-cols-2">
           {projects.map((p, i) => (
-            <ProjectCard
-              key={p.name}
-              project={p}
-              stars={stars[i]}
-              color={tileColors[i % tileColors.length]}
-              seed={i + 11}
-              detailed
-            />
+            <ProjectCard key={p.name} project={p} stars={stars[i]} detailed />
           ))}
         </div>
-        <p className="mt-6 font-mono text-sm font-bold">
-          <a href={profile.github} className="text-accent hover:underline">
-            git remote -v → github.com/{profile.handle}
-          </a>
-        </p>
+        <a href={profile.github} className="mt-6 inline-block font-mono text-sm text-accent hover:underline">
+          github.com/{profile.handle} →
+        </a>
       </Section>
 
       <Section index="02" title="Research">
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="divide-y divide-line">
           {research.map((r) => (
-            <div key={r.name} className="rounded-xl border border-line bg-surface p-5">
-              <h3 className="font-mono text-lg font-bold text-mint">{r.name}</h3>
-              <p className="mt-0.5 font-mono text-xs uppercase tracking-wide text-muted">{r.role}</p>
-              <p className="mt-3 text-[15px] leading-relaxed">{r.summary}</p>
-              <div className="mt-4">
-                <Chips items={r.stack} />
+            <article key={r.name} className="py-6 first:pt-0">
+              <h3 className="font-display text-base font-medium text-ink">{r.name}</h3>
+              <p className="mt-0.5 text-xs text-muted">{r.role}</p>
+              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed">{r.summary}</p>
+              <div className="mt-3">
+                <Tags items={r.stack} />
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </Section>
