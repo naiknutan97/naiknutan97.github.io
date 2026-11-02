@@ -17,19 +17,22 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 
 ## Design Philosophy
 
-A professional profile, not a portfolio: it reads like a well-set resume.
+A professional profile with an engineer's voice: it reads like a well-set resume, with restrained developer touches.
 
-**Prefer:** white page, one dark-blue accent, thin rules, Inter, single column (`max-w-3xl`), plain lists, real facts only.
+**Prefer:** Inter for prose, JetBrains Mono for metadata (dates, arXiv ids, stack chips, nav), one blue accent, thin rules, numbered sections with a label column (`max-w-5xl`), the terminal panel on the home page, bordered project cards, real facts only.
 
-**Avoid:** animations, particles, custom cursors, gradients, cards, skill-percentage bars, placeholder content. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
+**Avoid:** particles, custom cursors, gradients, page transitions, skill-percentage bars, placeholder content. The only motion is the terminal cursor blink, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
 
 ---
 
 ## Site Structure
 
-- **Profile** (`/`): name, role, links, professional profile, experience, publications, industrial training, education, skills, recognition
-- **Publications** (`/publications/`): papers with summaries and links, plus articles
-- **Resume** (`/resume/`): links to `public/Nutan_Kumar_Naik_Resume.pdf` (public copy with no phone number)
+- **Profile** (`/`): hero with terminal panel, stats strip, about, experience, featured projects, publications, skills, industrial training, education, recognition
+- **Projects** (`/projects/`): open-source projects with details, plus research projects
+- **Publications** (`/publications/`): papers with summaries, links and BibTeX, plus articles
+- **Resume** (`/resume/`): download and inline preview of `public/Nutan_Kumar_Naik_Resume.pdf` (public copy with no phone number)
+
+GitHub star counts are fetched at build time by `src/lib/github.ts` and fall back to `starsFallback` (or no badge) when the API is unavailable.
 - **Field Gallery** (`/gallery/`): built but hidden from the nav until the Drive photos are shared publicly
 
 ---
@@ -46,7 +49,7 @@ npm run lint       # Run ESLint (next lint)
 npx tsc --noEmit   # TypeScript check (run before committing)
 ```
 
-**Note:** This project uses `next/font/google` (Inter) via a CSS variable, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
+**Note:** This project uses `next/font/google` (Inter and JetBrains Mono) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
 
 ## Environment Notes
 
@@ -132,17 +135,24 @@ Re-run `npm run curate` anytime to update your selection. Previous choices are r
 ```
 src/
 ├── app/
-│   ├── layout.tsx       # Root layout (Inter, CSP meta, Nav, Footer)
+│   ├── layout.tsx       # Root layout (Inter + JetBrains Mono, CSP meta, Nav, Footer)
 │   ├── page.tsx         # Profile page
+│   ├── projects/
 │   ├── publications/
 │   ├── resume/
 │   └── gallery/
 ├── components/
-│   ├── Navigation.tsx   # Name + text links
+│   ├── Navigation.tsx   # Name + mono links
 │   ├── Footer.tsx
-│   └── Section.tsx      # Section heading with rule; PageTitle
+│   ├── Section.tsx      # Numbered section; PageTitle; Chips
+│   ├── Terminal.tsx     # whoami / now / stack panel
+│   ├── ProjectCard.tsx
+│   └── Icons.tsx
+├── lib/
+│   └── github.ts        # Build-time star counts
 └── data/
-    ├── profile.ts       # Profile, experience, training, education, skills, recognition
+    ├── profile.ts       # Profile, now, experience, training, education, skills, recognition
+    ├── projects.ts      # Open-source and research projects
     ├── publications.ts  # Papers and articles
     └── gallery.ts       # Gallery types and local fallback albums
 ```

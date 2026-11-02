@@ -38,6 +38,7 @@ export default function Gallery() {
   return (
     <>
       <PageTitle
+        path="gallery"
         title="Field Gallery"
         intro="Photographs from doctoral fieldwork: coal-mine hydrogeochemistry in Madhya Pradesh and seasonal water and sediment sampling in the Bhitarkanika mangroves, Odisha."
       />

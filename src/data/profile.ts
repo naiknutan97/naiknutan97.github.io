@@ -3,19 +3,32 @@
 
 export const profile = {
   name: "Nutan Kumar Naik",
+  handle: "naiknutan97",
   role: "AI/ML Engineer and Geoscientist",
+  tagline: "I build observability and governance tooling for AI agents, and apply machine learning to Earth data.",
   positions: ["Lead AI Researcher, Algen AI", "Doctoral Researcher, NIT Rourkela"],
-  summary:
-    "Geoscientist and AI engineer with an M.Sc in Geology from IIT Kharagpur and doctoral research at NIT Rourkela. " +
-    "Lead AI Researcher at Algen AI and first author of two arXiv papers on AI observability and agent assessment. " +
-    "Trained in well-log interpretation at ONGC and subsurface exploration at CMPDI. Brings machine learning, " +
-    "LLM engineering and satellite remote sensing to subsurface, water and emissions problems in the energy " +
-    "and petrochemical industry.",
+  summary: [
+    "I build software for AI systems that need to be observable and accountable. At Algen AI I lead research on " +
+      "Traccia, an open-source OpenTelemetry SDK for tracing, evaluating and governing AI agents, and I am first " +
+      "author of two arXiv papers on AI observability and agent assessment. I work mostly in Python and TypeScript.",
+    "I am also a trained geologist. I hold an M.Sc in Geology from IIT Kharagpur, trained in well-log interpretation " +
+      "at ONGC and subsurface exploration at CMPDI, and my doctoral research at NIT Rourkela applies machine learning " +
+      "to Sentinel-2 imagery for water quality. I bring both sides to energy, water and emissions problems.",
+  ],
   email: "kumarnaiknutan@gmail.com",
   linkedin: "https://www.linkedin.com/in/nutan-kumar-naik-63878b242/",
   github: "https://github.com/naiknutan97",
+  source: "https://github.com/naiknutan97/naiknutan97.github.io",
   resumePdf: "/Nutan_Kumar_Naik_Resume.pdf",
 };
+
+// Shown in the terminal panel on the home page.
+export const now = [
+  "Leading research on Traccia at Algen AI",
+  "PhD: machine learning on Sentinel-2 imagery for estuarine water quality",
+  "Writing about AI agent governance",
+];
+export const coreStack = ["python", "typescript", "opentelemetry", "pytorch", "fastapi", "next.js"];
 
 export interface Role {
   title: string;
@@ -23,6 +36,7 @@ export interface Role {
   place: string;
   period: string;
   points: string[];
+  stack: string[];
 }
 
 export const experience: Role[] = [
@@ -32,10 +46,11 @@ export const experience: Role[] = [
     place: "Bengaluru",
     period: "2025 – Present",
     points: [
-      "Lead research on Traccia, an OpenTelemetry-native observability, governance and compliance platform for AI agents and LLM applications.",
-      "Co-designed its telemetry pipeline, semantic guardrail assessment and hashed trace ledger, which produces tamper-resistant compliance evidence for regulations such as the EU AI Act.",
-      "Created AgentStripes, an evidence-graded maturity model for AI agents, and piloted it on 30 open-source agent repositories.",
+      "Lead research on Traccia, an OpenTelemetry-native observability, governance and compliance platform for AI agents, shipped as open-source Python and TypeScript SDKs.",
+      "Co-designed its telemetry pipeline, semantic guardrail assessment and hashed trace ledger, which turns runtime traces into tamper-resistant compliance evidence for regulations such as the EU AI Act.",
+      "Built AgentStripes, an evidence-graded maturity model and assessment engine for AI agents (40 capabilities, LLM judges, deterministic scoring), and piloted it on 30 open-source agent repositories.",
     ],
+    stack: ["Python", "TypeScript", "OpenTelemetry", "LLM-as-judge", "EU AI Act"],
   },
   {
     title: "Doctoral Researcher, Hydrogeochemistry & Remote Sensing",
@@ -47,6 +62,7 @@ export const experience: Role[] = [
       "Field sampling and laboratory analysis of water and sediment by ion chromatography, UV-Vis spectrophotometry and YSI ProDSS.",
       "Industry projects: mine-water chemistry for MCL (15 coal mines) and IMFA; slope stability for SAIL iron-ore mines; resistivity surveys for Indian Railways; rock mass rating of an underground coal mine.",
     ],
+    stack: ["Python", "Machine learning", "Sentinel-2", "Ion chromatography"],
   },
 ];
 
@@ -60,7 +76,7 @@ export const training = [
     text: "Coal exploration: borehole geophysical logging, drilling, and 3D geological modelling in MINEX.",
   },
   {
-    org: "CGWB / RGNGWTRI, Raipur",
+    org: "CGWB and RGNGWTRI, Raipur",
     text: "Groundwater management, rainwater harvesting and water budgeting.",
   },
 ];
@@ -77,15 +93,32 @@ export const education = [
 ];
 
 export const skills = [
-  { label: "AI & data", items: "Python, SQL, PyTorch, scikit-learn, XGBoost, SHAP, LLM APIs, OpenTelemetry, Docker, GCP" },
-  { label: "Geoscience", items: "Well-log interpretation, sedimentology, structural geology, hydrogeochemistry, MINEX" },
-  { label: "Remote sensing & GIS", items: "Sentinel-2, ESA SNAP, ENVI, ArcGIS, QGIS" },
-  { label: "Laboratory", items: "Ion chromatography, UV-Vis spectrophotometry, YSI ProDSS, petrographic microscopy" },
+  { label: "Languages", items: ["Python", "TypeScript", "SQL"] },
+  {
+    label: "AI/ML",
+    items: ["PyTorch", "scikit-learn", "XGBoost", "SHAP", "LangChain", "LLM APIs", "LLM-as-judge evaluation"],
+  },
+  {
+    label: "Engineering",
+    items: [
+      "OpenTelemetry", "FastAPI", "Streamlit", "Next.js", "React", "Tailwind CSS",
+      "Docker", "GCP", "GitHub Actions", "Git", "uv", "SQLite",
+    ],
+  },
+  {
+    label: "Geoscience",
+    items: ["Well-log interpretation", "Sedimentology", "Structural geology", "Hydrogeochemistry", "MINEX"],
+  },
+  { label: "Remote sensing & GIS", items: ["Sentinel-2", "ESA SNAP", "ENVI", "ArcGIS", "QGIS"] },
+  {
+    label: "Laboratory",
+    items: ["Ion chromatography", "UV-Vis spectrophotometry", "YSI ProDSS", "Petrographic microscopy"],
+  },
 ];
 
 export const recognition = [
-  "IIT JAM 2018: AIR 108",
-  "GATE 2020: AIR 234",
-  "CSIR NET (LS), Dec 2023: AIR 40",
-  "Secretary, Technical Society, NIT Rourkela (2023–24)",
+  { label: "IIT JAM 2018", value: "AIR 108" },
+  { label: "GATE 2020", value: "AIR 234" },
+  { label: "CSIR NET (LS), Dec 2023", value: "AIR 40" },
+  { label: "Technical Society, NIT Rourkela", value: "Secretary, 2023–24" },
 ];

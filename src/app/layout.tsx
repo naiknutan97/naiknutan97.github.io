@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -9,8 +9,13 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
+
 const description =
-  "Lead AI Researcher at Algen AI and doctoral researcher at NIT Rourkela. Geoscientist (M.Sc, IIT Kharagpur) working on AI observability, machine learning and subsurface, water and environmental data.";
+  "AI/ML engineer and geoscientist. Lead AI Researcher at Algen AI (Traccia, OpenTelemetry-native governance for AI agents) and doctoral researcher at NIT Rourkela. M.Sc Geology, IIT Kharagpur.";
 
 export const metadata: Metadata = {
   title: "Nutan Kumar Naik",
@@ -28,16 +33,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <head>
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://drive.google.com https://lh3.googleusercontent.com https://*.googleusercontent.com; frame-src https://docs.google.com https://accounts.google.com; connect-src 'self' https://www.googleapis.com https://accounts.google.com; font-src 'self' data:;"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://drive.google.com https://lh3.googleusercontent.com https://*.googleusercontent.com; frame-src 'self' https://docs.google.com https://accounts.google.com; connect-src 'self' https://www.googleapis.com https://accounts.google.com; font-src 'self' data:;"
         />
       </head>
       <body className="bg-paper font-sans text-ink">
         <Navigation />
-        <main className="mx-auto max-w-3xl px-4 pb-16 pt-10 sm:px-6">{children}</main>
+        <main className="mx-auto max-w-5xl px-4 pt-12 sm:px-6 sm:pt-16">{children}</main>
         <Footer />
       </body>
     </html>
