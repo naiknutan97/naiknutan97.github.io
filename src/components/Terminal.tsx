@@ -33,7 +33,7 @@ export default function Terminal() {
         <div className="pt-2">
           <Prompt cmd="ls stack/" />
         </div>
-        <p className="flex flex-wrap gap-x-4 text-[#79c0ff]">
+        <p className="flex flex-wrap gap-x-4 text-panel-data">
           {coreStack.map((s) => (
             <span key={s}>{s}</span>
           ))}

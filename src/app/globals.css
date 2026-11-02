@@ -7,15 +7,17 @@
     --paper: #ffffff;
     --ink: #111827;
     --muted: #5b6472;
-    --line: #e5e7eb;
+    /* Mid grey so rules and borders read clearly on white. */
+    --line: #c9ced6;
     --accent: #1d4ed8;
     --chip: #f3f4f6;
-    /* Terminal panel stays dark in both themes. */
-    --panel: #0d1117;
-    --panel-ink: #c9d1d9;
-    --panel-muted: #8b949e;
-    --panel-line: #30363d;
-    --prompt: #3fb950;
+    /* Terminal and code panels: light in light mode. */
+    --panel: #f6f8fa;
+    --panel-ink: #1f2328;
+    --panel-muted: #59636e;
+    --panel-line: #c9ced6;
+    --panel-data: #0550ae;
+    --prompt: #1a7f37;
     color-scheme: light;
   }
 
@@ -29,6 +31,11 @@
       --accent: #7aa7ff;
       --chip: #161a20;
       --panel: #11151b;
+      --panel-ink: #c9d1d9;
+      --panel-muted: #8b949e;
+      --panel-line: #30363d;
+      --panel-data: #79c0ff;
+      --prompt: #3fb950;
       color-scheme: dark;
     }
   }
@@ -41,6 +48,11 @@
     --accent: #7aa7ff;
     --chip: #161a20;
     --panel: #11151b;
+    --panel-ink: #c9d1d9;
+    --panel-muted: #8b949e;
+    --panel-line: #30363d;
+    --panel-data: #79c0ff;
+    --prompt: #3fb950;
     color-scheme: dark;
   }
 

@@ -20,6 +20,7 @@ const config: Config = {
         "panel-ink": "var(--panel-ink)",
         "panel-muted": "var(--panel-muted)",
         "panel-line": "var(--panel-line)",
+        "panel-data": "var(--panel-data)",
         prompt: "var(--prompt)",
       },
     },

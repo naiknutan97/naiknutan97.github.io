@@ -9,7 +9,7 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 ## Technology Stack
 
 - **Framework:** Next.js (TypeScript, App Router), static export (`output: "export"`)
-- **Styling:** Tailwind CSS with CSS-variable colour tokens in `globals.css`. Theme follows the system unless the visitor picks light or dark with the header toggle (`ThemeToggle.tsx`, stored in localStorage, applied as `data-theme` on `<html>` by an inline script before paint)
+- **Styling:** Tailwind CSS with CSS-variable colour tokens in `globals.css` (terminal and code panels have light and dark variants; light-mode rules use a mid grey, #c9ced6, so they stay visible). Theme follows the system unless the visitor picks light or dark with the header toggle (`ThemeToggle.tsx`, stored in localStorage, applied as `data-theme` on `<html>` by an inline script before paint)
 - **Content:** structured data in `src/data/`
 - **Deployment:** GitHub Pages via `.github/workflows/deploy.yml` on push to `main`
 
