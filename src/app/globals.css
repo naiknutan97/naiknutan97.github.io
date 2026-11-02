@@ -2,49 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* One dark "terminal green" theme for every visitor. */
 @layer base {
   :root {
-    --paper: #ffffff;
-    --ink: #111827;
-    --muted: #5b6472;
-    --line: #e5e7eb;
-    --accent: #1d4ed8;
-    --chip: #f3f4f6;
-    /* Terminal panel stays dark in both themes. */
-    --panel: #0d1117;
-    --panel-ink: #c9d1d9;
-    --panel-muted: #8b949e;
-    --panel-line: #30363d;
-    --prompt: #3fb950;
-    color-scheme: light;
+    --paper: #061f19;
+    --surface: #0a2e24;
+    --surface-2: #155144;
+    --line: #1d6854;
+    --mid: #2bab76;
+    --ink: #e0fff0;
+    --body: #c9dcd3;
+    --muted: #8fb8a6;
+    --mint: #b9ffd0;
+    --accent: #63ff86;
+    --panel: #03140f;
+    color-scheme: dark;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #0b0d10;
-      --ink: #e6e8eb;
-      --muted: #9aa3ad;
-      --line: #23272e;
-      --accent: #7aa7ff;
-      --chip: #161a20;
-      --panel: #11151b;
-      color-scheme: dark;
-    }
+  html {
+    background: var(--paper);
   }
 
   body {
     background: var(--paper);
-    color: var(--ink);
+    color: var(--body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    background: var(--accent);
+    color: var(--paper);
   }
 
   a {
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 }
 

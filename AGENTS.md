@@ -17,11 +17,15 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 
 ## Design Philosophy
 
-A professional profile with an engineer's voice: it reads like a well-set resume, with restrained developer touches.
+Full hacker style (think a dark-green tech-blog look), with resume-grade content underneath.
 
-**Prefer:** Inter for prose, JetBrains Mono for metadata (dates, arXiv ids, stack chips, nav), one blue accent, thin rules, numbered sections with a label column (`max-w-5xl`), the terminal panel on the home page, bordered project cards, real facts only.
+**Theme:** one dark theme for all visitors. Tokens in `globals.css`: `paper` #061f19, `surface` #0a2e24, `line` #1d6854, `mid` #2bab76, `mint` #b9ffd0 (headings), `accent` #63ff86 (neon), `panel` #03140f.
 
-**Avoid:** particles, custom cursors, gradients, page transitions, skill-percentage bars, placeholder content. The only motion is the terminal cursor blink, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
+**Type:** Silkscreen (`font-pixel`) for the name, page titles and big numbers; IBM Plex Mono for headings, tags, nav and metadata; IBM Plex Sans for prose.
+
+**Patterns:** neon header bar with pixel "NK" logo; secondary nav bar with 1–4 keyboard shortcuts; uppercase mono section headings followed by a long rule; solid neon `#hashtag` tags; pixel-art tiles (`Pixels.tsx`, seeded so builds are stable) on stats and project cards; terminal panel on the home page; `max-w-6xl`.
+
+**Avoid:** particles, custom cursors, page transitions, skill-percentage bars, placeholder content, other brands' names or logos. The only motion is the cursor blink, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
 
 ---
 
@@ -49,7 +53,7 @@ npm run lint       # Run ESLint (next lint)
 npx tsc --noEmit   # TypeScript check (run before committing)
 ```
 
-**Note:** This project uses `next/font/google` (Inter and JetBrains Mono) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
+**Note:** This project uses `next/font/google` (IBM Plex Sans, IBM Plex Mono, Silkscreen) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
 
 ## Environment Notes
 
@@ -135,16 +139,17 @@ Re-run `npm run curate` anytime to update your selection. Previous choices are r
 ```
 src/
 ├── app/
-│   ├── layout.tsx       # Root layout (Inter + JetBrains Mono, CSP meta, Nav, Footer)
+│   ├── layout.tsx       # Root layout (Plex Sans, Plex Mono, Silkscreen; CSP meta; Nav; Footer)
 │   ├── page.tsx         # Profile page
 │   ├── projects/
 │   ├── publications/
 │   ├── resume/
 │   └── gallery/
 ├── components/
-│   ├── Navigation.tsx   # Name + mono links
+│   ├── Navigation.tsx   # Neon bar, pixel logo, nav with 1–4 shortcuts
 │   ├── Footer.tsx
-│   ├── Section.tsx      # Numbered section; PageTitle; Chips
+│   ├── Pixels.tsx       # Seeded pixel-art SVG tiles
+│   ├── Section.tsx      # Numbered section; PageTitle; hashtag Chips
 │   ├── Terminal.tsx     # whoami / now / stack panel
 │   ├── ProjectCard.tsx
 │   └── Icons.tsx
