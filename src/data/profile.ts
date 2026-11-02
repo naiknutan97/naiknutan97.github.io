@@ -15,7 +15,7 @@ export const profile = {
       "at ONGC and subsurface exploration at CMPDI, and my doctoral research at NIT Rourkela applies machine learning " +
       "to Sentinel-2 imagery for water quality. I bring both sides to energy, water and emissions problems.",
   ],
-  email: "kumarnaiknutan@gmail.com",
+  email: "nutan.kn98@gmail.com",
   linkedin: "https://www.linkedin.com/in/nutan-kumar-naik-63878b242/",
   github: "https://github.com/naiknutan97",
   source: "https://github.com/naiknutan97/naiknutan97.github.io",
