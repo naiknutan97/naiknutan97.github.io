@@ -22,26 +22,13 @@ export const profile = {
   resumePdf: "/Nutan_Kumar_Naik_Resume.pdf",
 };
 
-export const status = "Leading research on Traccia at Algen AI";
-
-// Career drawn as an OpenTelemetry-style trace. Years only; months are used where the source gives them.
-export const NOW = 2026.85;
-export const trace = {
-  start: 2018,
-  end: 2027,
-  spans: [
-    { name: "msc.geology", attr: "iit_kgp", from: 2018, to: 2020 },
-    { name: "phd.research", attr: "nit_rourkela", from: 2021, to: NOW },
-    { name: "algen.lead_ai", attr: "traccia", from: 2025, to: NOW },
-  ],
-  events: [
-    { name: "iit_jam", attr: "AIR 108", at: 2018 },
-    { name: "gate", attr: "AIR 234", at: 2020 },
-    { name: "csir_net", attr: "AIR 40", at: 2023.92 },
-    { name: "arxiv.traccia", attr: "2607.14309", at: 2026.54 },
-    { name: "arxiv.agentstripes", attr: "2610.18603", at: 2026.79 },
-  ],
-};
+// Shown in the terminal panel on the home page.
+export const now = [
+  "Leading research on Traccia at Algen AI",
+  "PhD: machine learning on Sentinel-2 imagery for estuarine water quality",
+  "Writing about AI agent governance",
+];
+export const coreStack = ["python", "typescript", "opentelemetry", "pytorch", "fastapi", "next.js"];
 
 export interface Role {
   title: string;

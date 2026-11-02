@@ -2,83 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Graphite + phosphor amber. Light theme is the same system on field-notebook paper. */
 @layer base {
   :root {
-    --paper: #f6f5f1;
-    --surface: #ffffff;
-    --line: #e2dfd6;
-    --ink: #15171a;
-    --body: #34373c;
-    --muted: #6b6862;
-    --accent: #b45309;
-    --accent-ink: #ffffff;
-    --data: #0369a1;
-    --grid: rgba(21, 23, 26, 0.06);
-    /* Code and trace panels stay dark in both themes. */
-    --panel: #0b0c0e;
-    --panel-ink: #e6e3dc;
-    --panel-muted: #8d8a83;
-    --panel-line: #24272c;
-    --panel-accent: #ffb224;
-    --panel-data: #5cc8ff;
+    --paper: #ffffff;
+    --ink: #111827;
+    --muted: #5b6472;
+    --line: #e5e7eb;
+    --accent: #1d4ed8;
+    --chip: #f3f4f6;
+    /* Terminal panel stays dark in both themes. */
+    --panel: #0d1117;
+    --panel-ink: #c9d1d9;
+    --panel-muted: #8b949e;
+    --panel-line: #30363d;
+    --prompt: #3fb950;
     color-scheme: light;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #0e0f11;
-      --surface: #15171a;
-      --line: #26292e;
-      --ink: #f1efe9;
-      --body: #c9c6bf;
-      --muted: #8f8c85;
-      --accent: #ffb224;
-      --accent-ink: #1a1206;
-      --data: #5cc8ff;
-      --grid: rgba(255, 255, 255, 0.045);
-      --panel: #0a0b0d;
+      --paper: #0b0d10;
+      --ink: #e6e8eb;
+      --muted: #9aa3ad;
+      --line: #23272e;
+      --accent: #7aa7ff;
+      --chip: #161a20;
+      --panel: #11151b;
       color-scheme: dark;
     }
   }
 
   body {
-    background-color: var(--paper);
-    background-image: radial-gradient(var(--grid) 1px, transparent 1px);
-    background-size: 24px 24px;
-    color: var(--body);
+    background: var(--paper);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background: var(--accent);
-    color: var(--accent-ink);
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
   }
 
   a {
-    text-underline-offset: 4px;
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 4px;
+    text-underline-offset: 3px;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .pulse-dot {
-    animation: pulse 2.4s ease-in-out infinite;
+  .cursor {
+    animation: blink 1.1s steps(1) infinite;
   }
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
-  }
+@keyframes blink {
   50% {
-    box-shadow: 0 0 0 6px transparent;
+    opacity: 0;
   }
 }

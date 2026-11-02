@@ -35,25 +35,23 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="sticky top-0 z-20 border-b border-line bg-paper/85 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link href="/" className="group flex items-center gap-2.5">
-            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-ink font-mono text-xs font-bold text-paper">
-              nk
-            </span>
-            <span className="hidden font-display text-sm font-medium text-ink sm:inline">nutan.kumar.naik</span>
+      <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
+        <nav className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3.5 sm:px-6">
+          <Link href="/" className="flex items-baseline gap-2 text-[15px] font-semibold tracking-tight text-ink">
+            Nutan Kumar Naik
+            <span className="hidden font-mono text-xs font-normal text-muted sm:inline">@naiknutan97</span>
           </Link>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <ul className="flex items-center font-mono text-[12.5px] sm:text-[13px]">
+          <div className="flex items-center gap-4">
+            <ul className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px]">
               {links.map((link) => (
-                <li key={link.href} className={link.href === "/" ? "hidden sm:block" : undefined}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`rounded-md px-1.5 py-1.5 transition-colors sm:px-2.5 ${
-                      isActive(link.href) ? "text-ink" : "text-muted hover:text-ink"
-                    }`}
+                    className={
+                      isActive(link.href) ? "text-accent" : "text-muted transition-colors hover:text-ink"
+                    }
                   >
-                    {isActive(link.href) && <span className="text-accent">/</span>}
+                    {isActive(link.href) && <span aria-hidden="true">./</span>}
                     {link.label}
                   </Link>
                 </li>
@@ -62,7 +60,7 @@ export default function Navigation() {
             <button
               onClick={() => setPaletteOpen(true)}
               aria-label="Open command palette"
-              className="hidden items-center gap-1 rounded-md border border-line px-2 py-1 font-mono text-[11px] text-muted transition-colors hover:border-muted hover:text-ink md:inline-flex"
+              className="hidden items-center gap-1 rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-muted transition-colors hover:border-muted hover:text-ink md:inline-flex"
             >
               <kbd>Ctrl</kbd>
               <kbd>K</kbd>

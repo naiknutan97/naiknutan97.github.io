@@ -1,90 +1,78 @@
 import Link from "next/link";
-import Section, { Tags } from "@/components/Section";
-import CareerTrace from "@/components/CareerTrace";
+import Section, { Chips } from "@/components/Section";
+import Terminal from "@/components/Terminal";
 import ProjectCard from "@/components/ProjectCard";
 import { FileIcon, GitHubIcon, LinkedInIcon, MailIcon } from "@/components/Icons";
-import { education, experience, profile, recognition, skills, status, training } from "@/data/profile";
+import { education, experience, profile, recognition, skills, training } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
 import { getStars } from "@/lib/github";
 
-const ghost =
-  "inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-muted";
-
-function Dot() {
-  return <span className="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-accent" />;
+function Row({ left, right }: { left: React.ReactNode; right: string }) {
+  return (
+    <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+      <div>{left}</div>
+      <span className="shrink-0 font-mono text-xs text-muted">{right}</span>
+    </div>
+  );
 }
+
+const linkClass =
+  "inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm text-ink transition-colors hover:border-muted";
 
 export default async function Home() {
   const featured = projects.filter((p) => p.featured);
   const stars = await Promise.all(featured.map((p) => (p.repo ? getStars(p.repo, p.starsFallback) : undefined)));
   const tracciaStars = stars[0];
 
-  const metrics = [
-    { key: "papers.first_author", value: "2", label: "arXiv papers on AI observability and agent assessment" },
-    ...(tracciaStars
-      ? [{ key: "traccia_py.stars", value: String(tracciaStars), label: "GitHub stars on the Traccia Python SDK" }]
-      : []),
-    { key: "repos.assessed", value: "30", label: "open-source agent repositories scored with AgentStripes" },
-    { key: "mines.sampled", value: "15", label: "MCL coal mines in the mine-water chemistry study" },
+  const stats = [
+    { value: "2", label: "first-author arXiv papers" },
+    ...(tracciaStars ? [{ value: String(tracciaStars), label: "GitHub stars on traccia-py" }] : []),
+    { value: "30", label: "agent repos assessed with AgentStripes" },
+    { value: "15", label: "coal mines in the mine-water study" },
   ];
 
   return (
     <>
-      <header className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
+      <header className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
         <div>
-          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-body">
-            <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
-            {status}
-          </p>
-          <h1 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-[3.4rem]">
-            {profile.name}
-          </h1>
-          <p className="mt-3 font-mono text-sm text-accent">ai/ml engineer · geoscientist</p>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-body">{profile.tagline}</p>
+          <p className="font-mono text-xs text-accent">{profile.role.toLowerCase().replace(/ and /, " · ")}</p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{profile.name}</h1>
+          <p className="mt-4 text-lg leading-relaxed text-ink">{profile.tagline}</p>
           <p className="mt-3 text-sm text-muted">{profile.positions.join("  ·  ")}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-2">
-            <a
-              href={profile.resumePdf}
-              className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition hover:brightness-110"
-            >
-              <FileIcon /> Download resume
-            </a>
-            <a href={profile.github} className={ghost}>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <a href={profile.github} className={linkClass}>
               <GitHubIcon /> GitHub
             </a>
-            <a href={profile.linkedin} className={ghost}>
+            <a href={profile.linkedin} className={linkClass}>
               <LinkedInIcon /> LinkedIn
             </a>
-            <a href={`mailto:${profile.email}`} aria-label="Email" className={ghost}>
-              <MailIcon />
+            <a href={`mailto:${profile.email}`} className={linkClass}>
+              <MailIcon /> Email
+            </a>
+            <a
+              href={profile.resumePdf}
+              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-paper hover:opacity-90"
+            >
+              <FileIcon /> Resume
             </a>
           </div>
-          <p className="mt-5 hidden font-mono text-xs text-muted md:block">
-            press <kbd className="rounded border border-line px-1">ctrl</kbd>{" "}
-            <kbd className="rounded border border-line px-1">k</kbd> to jump anywhere
-          </p>
         </div>
-        <CareerTrace />
+        <Terminal />
       </header>
 
-      <dl className="mt-20 grid grid-cols-2 border-y border-line lg:grid-cols-4">
-        {metrics.map((m, i) => (
-          <div
-            key={m.key}
-            className={`py-6 pr-4 ${i % 2 ? "pl-4 border-l border-line" : ""} ${
-              i > 0 ? "lg:border-l lg:border-line lg:pl-6" : ""
-            } ${i > 1 ? "border-t border-line lg:border-t-0" : ""}`}
-          >
-            <dt className="font-mono text-[11px] text-muted">{m.key}</dt>
-            <dd className="mt-2 font-display text-3xl font-medium text-ink">{m.value}</dd>
-            <dd className="mt-1 text-xs leading-snug text-muted">{m.label}</dd>
+      <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="bg-paper px-4 py-4">
+            <dt className="sr-only">{s.label}</dt>
+            <dd className="font-mono text-2xl font-semibold text-ink">{s.value}</dd>
+            <dd className="mt-1 text-xs leading-snug text-muted">{s.label}</dd>
           </div>
         ))}
       </dl>
 
       <Section id="about" index="01" title="About">
-        <div className="max-w-2xl space-y-5 text-[17px] leading-relaxed">
+        <div className="max-w-2xl space-y-4 leading-relaxed text-ink">
           {profile.summary.map((p) => (
             <p key={p}>{p}</p>
           ))}
@@ -92,107 +80,109 @@ export default async function Home() {
       </Section>
 
       <Section id="experience" index="02" title="Experience">
-        <div className="divide-y divide-line">
+        <div className="space-y-9">
           {experience.map((role) => (
-            <article key={role.title} className="py-8 first:pt-0 last:pb-0">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                <h3 className="font-display text-lg font-medium text-ink">{role.title}</h3>
-                <span className="font-mono text-xs text-muted">{role.period}</span>
-              </div>
-              <p className="mt-1 text-muted">
-                {role.org}, {role.place}
-              </p>
-              <ul className="mt-4 max-w-3xl space-y-2 text-[15.5px] leading-relaxed">
+            <div key={role.title}>
+              <Row
+                left={
+                  <>
+                    <h3 className="font-semibold text-ink">{role.title}</h3>
+                    <p className="text-sm text-muted">
+                      {role.org}, {role.place}
+                    </p>
+                  </>
+                }
+                right={role.period}
+              />
+              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed marker:text-muted">
                 {role.points.map((p) => (
-                  <li key={p} className="flex gap-3">
-                    <Dot />
-                    <span>{p}</span>
-                  </li>
+                  <li key={p}>{p}</li>
                 ))}
               </ul>
-              <div className="mt-4">
-                <Tags items={role.stack} />
+              <div className="mt-3">
+                <Chips items={role.stack} />
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </Section>
 
       <Section id="projects" index="03" title="Projects">
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {featured.map((p, i) => (
             <ProjectCard key={p.name} project={p} stars={stars[i]} />
           ))}
         </div>
-        <Link href="/projects/" className="mt-6 inline-block font-mono text-sm text-accent hover:underline">
-          all projects and research →
+        <Link href="/projects/" className="mt-5 inline-block font-mono text-sm text-accent hover:underline">
+          All projects and research →
         </Link>
       </Section>
 
       <Section id="publications" index="04" title="Publications">
-        <ul className="divide-y divide-line">
+        <ul className="space-y-4">
           {publications.map((pub) => (
-            <li key={pub.title} className="grid gap-1 py-5 first:pt-0 sm:grid-cols-[9rem_1fr] sm:gap-6">
-              <span className="font-mono text-xs text-accent">{pub.venue.split(" ")[0]}</span>
-              <div>
-                <a href={pub.links[0].url} className="font-medium leading-snug text-ink hover:text-accent">
-                  {pub.title}
-                </a>
-                <p className="mt-1 text-sm text-muted">{pub.year} · first author</p>
-              </div>
+            <li key={pub.title} className="leading-relaxed">
+              <a href={pub.links[0].url} className="font-medium text-ink hover:text-accent hover:underline">
+                {pub.title}
+              </a>
+              <p className="font-mono text-xs text-muted">
+                {pub.venue} · {pub.year} · first author
+              </p>
             </li>
           ))}
         </ul>
-        <Link href="/publications/" className="mt-6 inline-block font-mono text-sm text-accent hover:underline">
-          abstracts and bibtex →
+        <Link href="/publications/" className="mt-5 inline-block font-mono text-sm text-accent hover:underline">
+          Abstracts, BibTeX and articles →
         </Link>
       </Section>
 
       <Section id="skills" index="05" title="Skills">
-        <dl className="divide-y divide-line">
+        <dl className="space-y-4">
           {skills.map((s) => (
-            <div key={s.label} className="grid gap-1 py-4 first:pt-0 sm:grid-cols-[11rem_1fr] sm:gap-6">
-              <dt className="font-mono text-xs text-muted">{s.label.toLowerCase()}</dt>
-              <dd className="text-[15px] leading-relaxed text-ink">{s.items.join("  ·  ")}</dd>
+            <div key={s.label} className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-4">
+              <dt className="text-sm font-medium text-ink">{s.label}</dt>
+              <dd>
+                <Chips items={s.items} />
+              </dd>
             </div>
           ))}
         </dl>
       </Section>
 
       <Section id="training" index="06" title="Industrial Training">
-        <ul className="space-y-4 text-[15.5px] leading-relaxed">
+        <ul className="space-y-3 text-[15px] leading-relaxed">
           {training.map((t) => (
-            <li key={t.org} className="flex gap-3">
-              <Dot />
-              <span>
-                <span className="font-medium text-ink">{t.org}.</span> {t.text}
-              </span>
+            <li key={t.org}>
+              <span className="font-medium">{t.org}.</span> <span className="text-ink">{t.text}</span>
             </li>
           ))}
         </ul>
       </Section>
 
       <Section id="education" index="07" title="Education">
-        <div className="divide-y divide-line">
+        <div className="space-y-5">
           {education.map((e) => (
-            <div key={e.degree} className="py-5 first:pt-0">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                <h3 className="font-medium text-ink">{e.degree}</h3>
-                <span className="font-mono text-xs text-muted">{e.period}</span>
-              </div>
-              <p className="text-muted">{e.school}</p>
-              {e.detail && <p className="mt-1 max-w-2xl text-sm">{e.detail}</p>}
-            </div>
+            <Row
+              key={e.degree}
+              left={
+                <>
+                  <h3 className="font-semibold text-ink">{e.degree}</h3>
+                  <p className="text-sm text-muted">{e.school}</p>
+                  {e.detail && <p className="mt-1 max-w-2xl text-sm text-muted">{e.detail}</p>}
+                </>
+              }
+              right={e.period}
+            />
           ))}
         </div>
       </Section>
 
       <Section id="recognition" index="08" title="Recognition">
-        <dl className="grid gap-x-8 sm:grid-cols-2">
+        <dl className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {recognition.map((r) => (
-            <div key={r.label} className="flex items-baseline justify-between gap-4 border-b border-line py-3">
-              <dt className="text-[15px] text-ink">{r.label}</dt>
-              <dd className="font-mono text-sm text-accent">{r.value}</dd>
+            <div key={r.label} className="flex items-baseline justify-between gap-4 bg-paper px-4 py-3">
+              <dt className="text-sm text-ink">{r.label}</dt>
+              <dd className="font-mono text-sm font-medium text-accent">{r.value}</dd>
             </div>
           ))}
         </dl>

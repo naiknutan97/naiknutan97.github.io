@@ -14,16 +14,16 @@ export default function Resume() {
         title="Resume"
         intro="One page covering AI research at Algen AI, open-source projects, doctoral research at NIT Rourkela, industrial training at ONGC and CMPDI, publications and technical skills."
       />
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="mt-8 flex flex-wrap gap-3">
         <a
           href={profile.resumePdf}
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition hover:brightness-110"
+          className="inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 text-sm font-medium text-paper hover:opacity-90"
         >
           <FileIcon /> Download PDF
         </a>
         <Link
           href="/"
-          className="inline-flex items-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-ink hover:border-muted"
+          className="rounded-md border border-line px-4 py-2 text-sm font-medium text-ink hover:border-muted"
         >
           View profile online
         </Link>
@@ -38,7 +38,7 @@ export default function Resume() {
       <iframe
         src={profile.resumePdf}
         title="Resume preview"
-        className="mt-10 hidden h-[1100px] w-full rounded-xl border border-line bg-white md:block"
+        className="mt-10 hidden h-[1100px] w-full rounded-lg border border-line md:block"
       />
     </>
   );

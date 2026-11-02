@@ -17,24 +17,22 @@ Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen A
 
 ## Design Philosophy
 
-"Field log meets trace viewer": an engineer's profile whose geek details come from the owner's own work (OpenTelemetry traces, geoscience field notebooks), not from another site's look.
+A professional profile with an engineer's voice: it reads like a well-set resume, with restrained developer touches.
 
-**Theme:** follows the system. Dark is graphite with phosphor amber; light is field-notebook paper with burnt amber. Tokens in `globals.css` (`paper`, `surface`, `line`, `ink`, `body`, `muted`, `accent`, `accent-ink`, `data`); `panel-*` tokens keep code and trace panels dark in both themes. Faint dot grid on the body.
+**Prefer:** Inter for prose, JetBrains Mono for metadata (dates, arXiv ids, stack chips, nav), one blue accent, thin rules, numbered sections with a label column (`max-w-5xl`), the terminal panel on the home page, bordered project cards, real facts only.
 
-**Type:** Martian Mono (`font-display`) for the name and headings; JetBrains Mono for metadata, keys, tags and nav; Inter for prose.
-
-**Patterns:** one slim sticky nav; command palette on Ctrl/Cmd+K or "/" (`CommandPalette.tsx`); hero career trace (`CareerTrace.tsx`, data in `profile.ts` `trace`); metrics row with dotted keys; numbered sections with a sticky label column; hairline dividers instead of boxes. Cards are used only for projects. Tags are lowercase and quiet; the amber accent marks one primary action per view. Footer shows build date and commit (`GITHUB_SHA`).
-
-**Avoid:** copying another brand's palette or layout, rainbow decoration, pixel fonts for long text, uppercase tag soup, particles, custom cursors, page transitions, skill-percentage bars, placeholder content. The only motion is the status-dot pulse, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume). Trace dates use years unless the source gives months.
+**Avoid:** particles, custom cursors, gradients, page transitions, skill-percentage bars, placeholder content. The only motion is the terminal cursor blink, disabled under `prefers-reduced-motion`. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
 
 ---
 
 ## Site Structure
 
-- **Profile** (`/`): hero with career trace, metrics row, about, experience, featured projects, publications, skills, industrial training, education, recognition
+- **Profile** (`/`): hero with terminal panel, stats strip, about, experience, featured projects, publications, skills, industrial training, education, recognition
 - **Projects** (`/projects/`): open-source projects with details, plus research projects
 - **Publications** (`/publications/`): papers with summaries, links and BibTeX, plus articles
 - **Resume** (`/resume/`): download and inline preview of `public/Nutan_Kumar_Naik_Resume.pdf` (public copy with no phone number)
+
+A command palette (`CommandPalette.tsx`) opens on Ctrl/Cmd+K or "/" for jumping to pages, sections and links.
 
 GitHub star counts are fetched at build time by `src/lib/github.ts` and fall back to `starsFallback` (or no badge) when the API is unavailable.
 - **Field Gallery** (`/gallery/`): built but hidden from the nav until the Drive photos are shared publicly
@@ -53,7 +51,7 @@ npm run lint       # Run ESLint (next lint)
 npx tsc --noEmit   # TypeScript check (run before committing)
 ```
 
-**Note:** This project uses `next/font/google` (Inter, JetBrains Mono, Martian Mono) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
+**Note:** This project uses `next/font/google` (Inter and JetBrains Mono) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
 
 ## Environment Notes
 
@@ -139,18 +137,18 @@ Re-run `npm run curate` anytime to update your selection. Previous choices are r
 ```
 src/
 ├── app/
-│   ├── layout.tsx       # Root layout (Inter, JetBrains Mono, Martian Mono; CSP meta; Nav; Footer)
+│   ├── layout.tsx       # Root layout (Inter + JetBrains Mono, CSP meta, Nav, Footer)
 │   ├── page.tsx         # Profile page
 │   ├── projects/
 │   ├── publications/
 │   ├── resume/
 │   └── gallery/
 ├── components/
-│   ├── Navigation.tsx   # Slim nav + Ctrl/Cmd+K handler
+│   ├── Navigation.tsx   # Name + mono links + Ctrl/Cmd+K handler
 │   ├── CommandPalette.tsx
-│   ├── CareerTrace.tsx  # Hero trace-viewer chart
 │   ├── Footer.tsx
-│   ├── Section.tsx      # Numbered section; PageTitle; Tags
+│   ├── Section.tsx      # Numbered section; PageTitle; Chips
+│   ├── Terminal.tsx     # whoami / now / stack panel
 │   ├── ProjectCard.tsx
 │   └── Icons.tsx
 ├── lib/

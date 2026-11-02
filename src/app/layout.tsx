@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Martian_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-const sans = Inter({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-inter",
 });
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-});
-
-const display = Martian_Mono({
-  subsets: ["latin"],
-  variable: "--font-display",
 });
 
 const description =
@@ -38,18 +33,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} ${display.variable}`}>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <head>
-        <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://drive.google.com https://lh3.googleusercontent.com https://*.googleusercontent.com; frame-src 'self' https://docs.google.com https://accounts.google.com; connect-src 'self' https://www.googleapis.com https://accounts.google.com; font-src 'self' data:;"
         />
       </head>
-      <body className="font-sans">
+      <body className="bg-paper font-sans text-ink">
         <Navigation />
-        <main className="mx-auto max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">{children}</main>
+        <main className="mx-auto max-w-5xl px-4 pt-12 sm:px-6 sm:pt-16">{children}</main>
         <Footer />
       </body>
     </html>

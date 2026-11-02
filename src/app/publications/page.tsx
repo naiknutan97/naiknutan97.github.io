@@ -31,28 +31,28 @@ export default function Publications() {
       />
 
       <Section index="01" title="Papers">
-        <div className="divide-y divide-line">
+        <div className="space-y-10">
           {publications.map((pub) => (
-            <article key={pub.title} className="py-8 first:pt-0">
+            <article key={pub.title}>
               <p className="font-mono text-xs text-accent">
                 {pub.venue} · {pub.year}
               </p>
-              <h3 className="mt-2 font-display text-lg font-medium leading-snug text-ink">{pub.title}</h3>
-              <p className="mt-2 text-sm text-muted">{pub.authors}</p>
-              <p className="mt-4 max-w-3xl text-[15.5px] leading-relaxed">{pub.summary}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm">
+              <h3 className="mt-1.5 text-lg font-semibold leading-snug text-ink">{pub.title}</h3>
+              <p className="mt-1 text-sm text-muted">{pub.authors}</p>
+              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink">{pub.summary}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs">
                 {pub.links.map((l) => (
                   <a key={l.url} href={l.url} className="inline-flex items-center gap-0.5 text-accent hover:underline">
                     {l.label}
-                    <ArrowIcon className="h-3.5 w-3.5" />
+                    <ArrowIcon className="h-3 w-3" />
                   </a>
                 ))}
               </div>
-              <details className="mt-4">
+              <details className="group mt-3">
                 <summary className="cursor-pointer select-none font-mono text-xs text-muted hover:text-ink">
-                  cite (bibtex)
+                  BibTeX
                 </summary>
-                <pre className="mt-3 overflow-x-auto rounded-lg border border-panel-line bg-panel p-4 font-mono text-[12.5px] leading-relaxed text-panel-ink">
+                <pre className="mt-2 overflow-x-auto rounded-lg border border-panel-line bg-panel p-4 font-mono text-[12px] leading-relaxed text-panel-ink">
                   {bibtex(pub)}
                 </pre>
               </details>
@@ -62,13 +62,13 @@ export default function Publications() {
       </Section>
 
       <Section index="02" title="Articles">
-        <ul className="divide-y divide-line">
+        <ul className="space-y-4">
           {articles.map((a) => (
-            <li key={a.url} className="py-5 first:pt-0">
-              <a href={a.url} className="font-medium leading-snug text-ink hover:text-accent">
+            <li key={a.url}>
+              <a href={a.url} className="font-medium text-ink hover:text-accent hover:underline">
                 {a.title}
               </a>
-              <p className="mt-1 font-mono text-xs text-muted">
+              <p className="font-mono text-xs text-muted">
                 {a.outlet} · {a.date}
               </p>
             </li>

@@ -67,7 +67,7 @@ export default function CommandPalette({ open, onClose }: { open: boolean; onClo
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
-        className="w-full max-w-lg overflow-hidden rounded-xl border border-line bg-surface shadow-2xl"
+        className="w-full max-w-lg overflow-hidden rounded-xl border border-line bg-paper shadow-2xl"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 border-b border-line px-4">
@@ -104,7 +104,7 @@ export default function CommandPalette({ open, onClose }: { open: boolean; onClo
                 onMouseEnter={() => setActive(i)}
                 onClick={() => run(c)}
                 className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm ${
-                  i === active ? "bg-accent text-accent-ink" : "text-ink"
+                  i === active ? "bg-accent text-paper" : "text-ink"
                 }`}
               >
                 <span>{c.hint === "clipboard" && copied ? "Copied ✓" : c.label}</span>
