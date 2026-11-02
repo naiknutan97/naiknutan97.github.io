@@ -1,0 +1,29 @@
+{
+  "$schema": "./sync-config.schema.json",
+  "albums": [
+    {
+      "id": "coal-mines",
+      "title": "Coal Mines Field Visit",
+      "description": "Fieldwork at Aditya Birla TMC coal mines in Bicharpur, Shahdol, Madhya Pradesh. Sampling and hydrogeochemical analysis of mine water and surrounding water bodies.",
+      "location": "Bicharpur, Shahdol, Madhya Pradesh",
+      "date": "November 2023",
+      "folderId": "1z-M-bJlGTK_BphM9gPHx_Y9POSZIlGZx"
+    },
+    {
+      "id": "bhitarkanika",
+      "title": "Bhitarkanika Mangrove Fieldwork",
+      "description": "Seasonal fieldwork in Bhitarkanika National Park, Odisha — one of India's largest mangrove ecosystems. Hydrogeochemical sampling and water quality analysis across summer, monsoon, and winter seasons.",
+      "location": "Bhitarkanika National Park, Odisha",
+      "date": "2023 - 2024",
+      "folderId": "1-RSsqwRduu3acMb9brAqVNV3MFfaVRsy"
+    },
+    {
+      "id": "chaibasa",
+      "title": "Chaibasa Fieldwork",
+      "description": "Fieldwork in Chaibasa, Jharkhand.",
+      "location": "Chaibasa, Jharkhand",
+      "date": "2024",
+      "folderId": "1ewBoHe49SkgAoWP29lHnM1uiJVtKO7J_"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["albums"],
+  "properties": {
+    "albums": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description", "location", "date", "folderId"],
+        "properties": {
+          "id": { "type": "string", "description": "Unique album identifier (used as URL key)" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "location": { "type": "string" },
+          "date": { "type": "string" },
+          "folderId": { "type": "string", "description": "Google Drive folder ID" }
+        }
+      }
+    }
+  }
+}

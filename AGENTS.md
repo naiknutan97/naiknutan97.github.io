@@ -2,82 +2,51 @@
 
 ## Project Overview
 
-Personal portfolio website for Nutan Kumar Naik — AI/ML Engineer and researcher.
-
-Presents a professional identity combining:
-- AI/ML engineering
-- Agentic AI systems development
-- AI observability and governance
-- OpenTelemetry-based AI infrastructure
-- Research publications
-- Open-source projects
-- Technical writing
+Professional profile website for Nutan Kumar Naik: Lead AI Researcher at Algen AI, doctoral researcher at NIT Rourkela, geoscientist (M.Sc, IIT Kharagpur). It mirrors the current one-page resume.
 
 ---
 
 ## Technology Stack
 
-- **Framework:** Next.js (TypeScript, App Router)
-- **Styling:** Tailwind CSS, responsive-first, dark modern AI-inspired theme
-- **UI Components:** Reusable React components, accessible patterns
-- **Animation:** Framer Motion (subtle, performance-first)
-- **Content:** Markdown/MDX for articles; structured data for projects, publications, blogs
-- **Deployment:** Vercel with GitHub integration
+- **Framework:** Next.js (TypeScript, App Router), static export (`output: "export"`)
+- **Styling:** Tailwind CSS with CSS-variable colour tokens in `globals.css`; dark mode follows the system (`darkMode: "media"`)
+- **Content:** structured data in `src/data/`
+- **Deployment:** GitHub Pages via `.github/workflows/deploy.yml` on push to `main`
 
 ---
 
 ## Design Philosophy
 
-Communicate: **"AI Engineer + Research Scientist"**
+A professional profile, not a portfolio: it reads like a well-set resume.
 
-**Prefer:** minimalist, professional, technical, modern, clean typography, strong visual hierarchy, dark mode, code-inspired elements.
+**Prefer:** white page, one dark-blue accent, thin rules, Inter, single column (`max-w-3xl`), plain lists, real facts only.
 
-**Avoid:** generic templates, excessive gradients, distracting animations, overly playful designs.
+**Avoid:** animations, particles, custom cursors, gradients, cards, skill-percentage bars, placeholder content. Only list publications, projects and claims that can be verified (arXiv, GitHub, the resume).
 
 ---
 
 ## Site Structure
 
-### Home
-1. Hero — name, role (AI/ML Engineer | Agentic AI | AI Governance), summary, social links (GitHub, LinkedIn, Google Scholar, Email)
-2. Expertise — Agentic AI, AI observability, LLM applications, ML, Geospatial AI
-3. Featured Projects
-4. Publications
-5. Technical Writing
-
-### About
-- Professional journey, AI engineering experience, research background, technical interests
-
-### Projects
-Each: title, description, problem, approach, tech stack, architecture diagrams, links.
-
-Featured:
-- Traccia AI Observability Platform
-- Agentic AI Systems
-- ML-based Environmental Models
-- Remote Sensing Applications
-
-### Publications
-Research papers, preprints, conference/journal publications, arXiv links.
-
-### Blog
-Topics: Agentic AI, OpenTelemetry, AI governance, LLM engineering, ML research.
-
-### Resume
-Downloadable resume, professional timeline, skills.
+- **Profile** (`/`): name, role, links, professional profile, experience, publications, industrial training, education, skills, recognition
+- **Publications** (`/publications/`): papers with summaries and links, plus articles
+- **Resume** (`/resume/`): links to `public/Nutan_Kumar_Naik_Resume.pdf` (public copy with no phone number)
+- **Field Gallery** (`/gallery/`): built but hidden from the nav until the Drive photos are shared publicly
 
 ---
 
 ## Developer Commands
 
 ```sh
-npm run dev      # Start dev server at localhost:3000
-npm run build    # Production build
-npm run lint     # Run ESLint (next lint)
-npx tsc --noEmit # TypeScript check (run before committing)
+npm run dev        # Start dev server at localhost:3000
+npm run build      # Production build
+npm run build:full # Sync gallery from Drive + build
+npm run sync       # Generate gallery data from Drive (uses curation if available)
+npm run curate     # Interactive photo selection via browser UI
+npm run lint       # Run ESLint (next lint)
+npx tsc --noEmit   # TypeScript check (run before committing)
 ```
 
-**Note:** This project uses `next/font/google` (Inter + JetBrains Mono) via CSS variables, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
+**Note:** This project uses `next/font/google` (Inter) via a CSS variable, loaded in `layout.tsx`. Do not use CSS `@import` for fonts.
 
 ## Environment Notes
 
@@ -86,40 +55,99 @@ npx tsc --noEmit # TypeScript check (run before committing)
 - TypeScript compiles cleanly (`tsc --noEmit` → exit 0). Verify code correctness this way when the dev server cannot run.
 - Clean `.next` before troubleshooting build failures: `rm -rf .next`
 
+## Google Drive Gallery Setup
+
+The gallery fetches photos from Google Drive at build time. A curation workflow lets you interactively select which photos appear.
+
+### Workflow
+
+```
+npm run curate  →  interactive browser UI, pick photos, save
+npm run sync    →  generate gallery JSON from your selection
+npm run build   →  build the site with Drive-sourced photos
+```
+
+### Required environment variables
+
+Copy `.env.example` to `.env.local` and fill in:
+
+```
+GOOGLE_OAUTH_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_OAUTH_CLIENT_SECRET=your-client-secret
+```
+
+### Google Cloud Console setup:
+
+1. Go to https://console.cloud.google.com/ → Create a project
+2. Enable the **Google Drive API** (APIs & Services → Library)
+3. Go to **APIs & Services → Credentials**
+4. Create **OAuth 2.0 Client ID**:
+   - Application type: **Desktop app**
+   - Name: `gallery-sync`
+   - Add `http://localhost:3456` and `http://localhost:3457` to **Authorized redirect URIs**
+5. Copy the **Client ID** and **Client Secret** into `.env.local`
+
+### Configure albums
+
+Edit `scripts/sync-config.json` and replace `REPLACE_WITH_DRIVE_FOLDER_ID` with your actual Google Drive folder IDs. To find a folder ID: open the folder in Drive, the URL is `https://drive.google.com/drive/folders/FOLDER_ID`.
+
+### First-time setup
+
+```sh
+# Install dependencies (one-time)
+npm install
+
+# Authenticate with Google (one-time, opens browser)
+npm run curate
+
+# The browser shows all photos from your Drive folders
+# Check the ones you want, click "Save Selection"
+# Then Ctrl+C to stop the server
+
+# Generate gallery data from your curated selection
+npm run sync
+
+# Build the site
+npm run build
+```
+
+Re-run `npm run curate` anytime to update your selection. Previous choices are remembered.
+
+### How it works
+
+- `scripts/auth.mjs` — handles OAuth 2.0 flow. First run opens a browser for Google login. A refresh token is saved to `scripts/auth-token.json` (`.gitignore`d) for subsequent automated use.
+- `scripts/curate.mjs` — starts a local web UI at `http://localhost:3457`. Displays thumbnails of all photos from your Drive folders. Checkboxes let you pick which to include. "Save Selection" writes to `scripts/curation.json`.
+- `scripts/sync-gallery.mjs` — reads `curation.json` (if it exists) and fetches only the selected files from Drive. Generates `public/data/gallery-sync.json` with Google Drive image URLs.
+- Gallery page (`src/app/gallery/page.tsx`) — fetches `gallery-sync.json` at runtime. If it exists, uses Drive photos. Otherwise falls back to `src/data/local-albums.ts` (committed local photos).
+- Images are served directly from Google Drive's CDN — **no photo binaries are stored in the repo**.
+
+### Security
+
+- Content-Security-Policy meta tag restricts scripts/images/frames to trusted origins
+- OAuth refresh token is stored locally in `.gitignore`d file (never committed)
+- Photo metadata (file IDs only) is in `gallery-sync.json`
+
 ## Project Structure
 
 ```
 src/
-├── app/           # App Router pages
-│   ├── layout.tsx # Root layout (fonts, ScrollProgress, CustomCursor, Nav, Footer)
-│   ├── page.tsx   # Homepage (Hero, Bento Expertise, Projects, Publications, Blog)
-│   ├── about/
-│   ├── projects/
+├── app/
+│   ├── layout.tsx       # Root layout (Inter, CSP meta, Nav, Footer)
+│   ├── page.tsx         # Profile page
 │   ├── publications/
-│   ├── blog/
-│   └── resume/
-├── components/    # Reusable UI components
-│   ├── Navigation.tsx    # Scroll-aware floating pill nav (glassmorphism)
+│   ├── resume/
+│   └── gallery/
+├── components/
+│   ├── Navigation.tsx   # Name + text links
 │   ├── Footer.tsx
-│   ├── Hero.tsx          # Avatar ring, typing effect, mesh bg, metrics
-│   ├── Section.tsx       # Accent header, scroll-triggered fade-up
-│   ├── ProjectCard.tsx
-│   ├── PublicationCard.tsx
-│   ├── BlogCard.tsx
-│   ├── Typewriter.tsx    # Cycling text effect
-│   ├── ScrollProgress.tsx
-│   ├── CustomCursor.tsx  # Ring follower
-│   ├── SkillBar.tsx      # Animated progress bars
-│   ├── PageTransition.tsx
-│   ├── ThemeToggle.tsx
-│   └── AccentPicker.tsx
-├── providers/
-│   └── ThemeProvider.tsx  # Dark/light + 6 accent colors, localStorage
-└── data/          # Structured content
-    ├── projects.ts
-    ├── publications.ts
-    └── blog.ts
+│   └── Section.tsx      # Section heading with rule; PageTitle
+└── data/
+    ├── profile.ts       # Profile, experience, training, education, skills, recognition
+    ├── publications.ts  # Papers and articles
+    └── gallery.ts       # Gallery types and local fallback albums
 ```
+
+The resume PDF is generated outside this repo by `E:\projects\blogs\research\petrochemical-companies\resume\build_resumes.py` (web variant) and copied to `public/`.
 
 ## Component Guidelines
 

@@ -32,6 +32,22 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!/.env.example
+
+# Google service account key (never commit)
+service-account*.json
+
+# Generated gallery sync data (optional — uncomment if you don't want IDs in repo)
+# public/data/gallery-sync.json
+
+# Curation selection file
+scripts/curation.json
+
+# OAuth refresh token (generated on first auth)
+scripts/auth-token.json
+
+# OAuth client secret JSON (download from Google Cloud Console)
+client_secret_*.json
 
 # vercel
 .vercel

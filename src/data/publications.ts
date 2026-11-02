@@ -3,53 +3,46 @@ export interface Publication {
   authors: string;
   venue: string;
   year: number;
-  type: "conference" | "journal" | "preprint";
-  abstract: string;
-  link?: string;
+  summary: string;
+  links: { label: string; url: string }[];
 }
 
 export const publications: Publication[] = [
   {
-    title:
-      "A Framework for Observable Agentic AI Systems using OpenTelemetry",
-    authors: "Nutan Kumar Naik, et al.",
-    venue: "Preprint",
-    year: 2025,
-    type: "preprint",
-    abstract:
-      "A comprehensive framework for adding observability to agentic AI systems using OpenTelemetry, enabling tracing, monitoring, and debugging of multi-agent workflows in production environments.",
-    link: "https://arxiv.org",
+    title: "AgentStripes: An Evidence-Graded Maturity Model for AI Agents",
+    authors: "Nutan Kumar Naik, Vijay Prasad Poudel, Aditya Kumar Saroj, Saurav Samantray, Abhishek Patel",
+    venue: "arXiv:2610.18603 [cs.AI]",
+    year: 2026,
+    summary:
+      "A maturity model that rates AI agents on 40 capabilities in 12 areas and gives credit only for evidence, such as verified code quotes and instrument checks. Piloted on 30 public open-source agent repositories.",
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2610.18603" }],
   },
   {
-    title:
-      "Deep Learning Approaches for Land Cover Classification Using Multispectral Satellite Imagery",
-    authors: "Nutan Kumar Naik, et al.",
-    venue: "Journal of Geospatial AI",
-    year: 2024,
-    type: "journal",
-    abstract:
-      "Evaluates CNN and transformer-based architectures for land cover classification across diverse geographical regions using publicly available multispectral satellite data.",
-    link: "https://example.com",
+    title: "Traccia: An OpenTelemetry-Based Governance Platform for AI Systems",
+    authors: "Nutan Kumar Naik, Aditya Kumar Saroj, Vijay Prasad Poudel, Saurav Samantray, Abhishek Patel",
+    venue: "arXiv:2607.14309 [cs.AI]",
+    year: 2026,
+    summary:
+      "An OpenTelemetry-based governance framework for AI systems that links regulatory requirements such as the EU AI Act to runtime telemetry, passive semantic guardrail assessment, and execution lineage recorded in a hashed trace ledger with tamper-resistant compliance evidence.",
+    links: [
+      { label: "arXiv", url: "https://arxiv.org/abs/2607.14309" },
+      { label: "Code", url: "https://github.com/traccia-ai/traccia-py" },
+    ],
   },
+];
+
+export interface Article {
+  title: string;
+  outlet: string;
+  date: string;
+  url: string;
+}
+
+export const articles: Article[] = [
   {
-    title:
-      "LLM Observability: Tracing, Monitoring, and Evaluation in Production",
-    authors: "Nutan Kumar Naik",
-    venue: "Conference on AI Infrastructure",
-    year: 2024,
-    type: "conference",
-    abstract:
-      "Practical techniques for implementing observability in LLM-powered applications, including token-level tracing, cost attribution, quality evaluation, and safety monitoring.",
-    link: "https://example.com",
-  },
-  {
-    title:
-      "Geospatial AI for Urban Development Tracking: A Case Study",
-    authors: "Nutan Kumar Naik, et al.",
-    venue: "International Conference on Geoinformatics",
-    year: 2023,
-    type: "conference",
-    abstract:
-      "Applies ML techniques to satellite imagery time-series for automated urban development tracking, demonstrating practical applications for city planning and infrastructure monitoring.",
+    title: "An AI agent deleted a production database in 9 seconds. What should have stopped it?",
+    outlet: "Indie Hackers",
+    date: "October 2026",
+    url: "https://www.indiehackers.com/post/an-ai-agent-deleted-a-production-database-in-9-seconds-what-should-have-stopped-it-1fde961ff7",
   },
 ];
